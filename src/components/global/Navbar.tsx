@@ -1,6 +1,4 @@
-"use client";
-
-import React, { useState } from "react";
+import  { useState } from "react";
 import { FiHome, FiUser, FiSettings, FiMenu, FiX } from "react-icons/fi";
 import MobileNavButton from "../ui/MobileNavButton";
 import NavButton from "../ui/Navbutton";

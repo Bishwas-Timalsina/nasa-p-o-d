@@ -1,4 +1,4 @@
-import { FiGithub, FiLinkedin, FiTwitter } from "react-icons/fi";
+import { FiGithub, FiLinkedin } from "react-icons/fi";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
