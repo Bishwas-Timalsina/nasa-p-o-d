@@ -32,7 +32,7 @@ const Gallery = () => {
   }
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-8 px-4 py-4">
       <h1 className="text-4xl font-[600] text-center">Gallery</h1>
       {galleryData ? (
         <div className="flex flex-col gap-12">
@@ -41,8 +41,10 @@ const Gallery = () => {
               key={index}
               className="flex flex-col justify-center items-center gap-2 rounded-md cursor-pointer"
             >
-              <h2 className="text-[24px] font-[700]">{item.title}</h2>
-              <h2 className="text-center">{item?.date}</h2>
+              <div className="flex justify-center items-center flex-col">
+                <h2 className="text-[24px] font-[700]">{item.title}</h2>
+                <h2 className="text-center">{item?.date}</h2>
+              </div>
               <Tooltip
                 color={"#4b5563"}
                 placement="right"
@@ -55,7 +57,7 @@ const Gallery = () => {
                 className="h-[200px] overflow-y-scroll"
               >
                 <img
-                  src={item?.hdurl}
+                  src={item?.url}
                   alt=""
                   width={500}
                   height={400}
