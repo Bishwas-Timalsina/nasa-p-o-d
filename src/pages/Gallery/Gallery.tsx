@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import useFetchContent from "../../hooks/useFetchContent";
-import { Tooltip } from "antd";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import "react-photo-view/dist/react-photo-view.css";
 import { Link } from "react-router-dom";
