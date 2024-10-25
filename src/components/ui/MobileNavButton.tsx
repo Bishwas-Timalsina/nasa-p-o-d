@@ -1,18 +1,22 @@
+import { Link } from "react-router-dom";
+
 const MobileNavButton = ({
   icon,
   label,
+  route,
 }: {
   icon: React.ReactNode;
   label: string;
+  route: string;
 }) => {
   return (
-    <a
-      href="#"
-      className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium flex items-center space-x-2"
+    <Link
+      to={`/${route}`}
+      className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex items-center space-x-2"
     >
       {icon}
       <span>{label}</span>
-    </a>
+    </Link>
   );
 };
 export default MobileNavButton;

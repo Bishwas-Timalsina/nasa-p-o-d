@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 import useFetchContent from "../../hooks/useFetchContent";
 import { Tooltip } from "antd";
+import { PhotoProvider, PhotoView } from "react-photo-view";
+import "react-photo-view/dist/react-photo-view.css";
+import { Link } from "react-router-dom";
 
 const Gallery = () => {
   const { fetchData, loading, error } = useFetchContent();
   const [galleryData, setGalleryData] = useState<any>(null);
-  console.log(galleryData);
 
   const fetchAllData = async () => {
-    const endPoint = "&count=10";
+    const endPoint = "&count=20";
     const data = await fetchData(endPoint);
     if (data) {
       setGalleryData(data);
@@ -21,7 +23,7 @@ const Gallery = () => {
 
   if (loading) {
     return (
-      <div className="h-[100vh] flex justify-center items-center">
+      <div className="min-h-screen flex justify-center items-center">
         Loading...
       </div>
     );
@@ -33,43 +35,42 @@ const Gallery = () => {
 
   return (
     <div className="flex flex-col gap-8 px-4 py-4">
-      <h1 className="text-4xl font-[600] text-center">Gallery</h1>
-      {galleryData ? (
-        <div className="flex flex-col gap-12">
-          {galleryData.map((item: any, index: number) => (
-            <div
-              key={index}
-              className="flex flex-col justify-center items-center gap-2 rounded-md cursor-pointer"
-            >
-              <div className="flex justify-center items-center flex-col">
-                <h2 className="text-[24px] font-[700]">{item.title}</h2>
-                <h2 className="text-center">{item?.date}</h2>
-              </div>
-              <Tooltip
-                color={"#4b5563"}
-                placement="right"
-                title={
-                  item?.explanation
-                    ? item.explanation
-                    : "No explanation available"
-                }
-                trigger="hover"
-                className="h-[200px] overflow-y-scroll"
+      <h1 className="text-3xl sm:text-4xl font-semibold text-center">
+        Gallery
+      </h1>
+      <PhotoProvider>
+        {galleryData ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-6">
+            {galleryData.map((item: any, index: number) => (
+              <div
+                key={index}
+                className="flex flex-col justify-center items-center gap-2 rounded-md cursor-pointer"
               >
-                <img
-                  src={item?.url}
-                  alt=""
-                  width={500}
-                  height={400}
-                  className="rounded-md"
-                />
-              </Tooltip>
-            </div>
-          ))}
-        </div>
-      ) : (
-        <div>No data available</div>
-      )}
+                <div className="flex flex-col items-center text-center">
+                  <h2 className="text-lg sm:text-xl font-bold">{item.title}</h2>
+                  <h3 className="text-sm sm:text-base">{item?.date}</h3>
+                </div>
+                <PhotoView src={item?.url}>
+                  <img
+                    src={item?.url}
+                    alt={item?.title}
+                    className="rounded-md w-full h-auto object-cover max-h-[400px] sm:max-h-[250px] md:max-h-[300px] lg:max-h-[400px]"
+                  />
+                </PhotoView>
+                <Link
+                  to={item?.hdurl}
+                  target="_blank"
+                  className="text-white px-4 py-2 rounded-md border-2 border-white text-sm sm:text-base md:text-lg font-semibold"
+                >
+                  View in HD
+                </Link>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div>No data available</div>
+        )}
+      </PhotoProvider>
     </div>
   );
 };
