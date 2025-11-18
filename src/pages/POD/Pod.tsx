@@ -22,7 +22,7 @@ const Pod = () => {
   if (loading) {
     return (
       <div className="h-[100vh] flex justify-center items-center">
-        Loading...
+        Content is Loading...
       </div>
     );
   }
